@@ -2,7 +2,11 @@ var path = require('path');
 var webpack = require('webpack');
 
 var config = {
-  devtool: 'cheap-module-eval-source-map',
+  stats: {
+    errorDetails: true,
+    children: true
+  },
+  devtool: 'eval-cheap-module-source-map',
   entry: [
     'webpack-hot-middleware/client',
     './app/main'
@@ -14,8 +18,7 @@ var config = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })
